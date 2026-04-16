@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RedList</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <section id="screen-login" class="screen screen--centered">
+        <div class="auth-card">
+          <img class="app-logo" src="assets/logo.png" alt="Logo de RedList" />
+          <h1 class="screen-title">BIENVENIDOS</h1>
+          <p class="screen-subtitle">REDLIST</p>
+
+          <form id="login-form" class="login-row" novalidate>
+            <label class="field field--inline">
+              <span class="sr-only">Correo electrónico</span>
+              <input
+                id="login-email"
+                class="input"
+                type="email"
+                maxlength="30"
+                placeholder="Correo electrónico"
+                autocomplete="email"
+              />
+              <span class="field-hint">Máximo 30 caracteres</span>
+            </label>
+
+            <label class="field field--inline password-field">
+              <span class="sr-only">Contraseña</span>
+              <input
+                id="login-password"
+                class="input password-input"
+                type="password"
+                maxlength="15"
+                placeholder="Contraseña"
+                autocomplete="current-password"
+              />
+              <button
+                id="toggle-login-password"
+                class="password-toggle"
+                type="button"
+                aria-label="Mostrar u ocultar contraseña"
+              >
+                Ver
+              </button>
+              <span class="field-hint">Máximo 15 caracteres</span>
+            </label>
+          </form>
+
+          <p id="login-error" class="form-error hidden"></p>
+
+          <button id="login-submit" class="btn btn--blue btn--wide" type="button">
+            Iniciar sesión
+          </button>
+
+          <p class="helper-text">
+            ¿No tienes una cuenta?
+            <button id="go-register" class="link-button" type="button">
+              Regístrate
+            </button>
+          </p>
+
+          <button id="create-account-cta" class="btn btn--orange btn--wide" type="button">
+            Crear cuenta
+          </button>
+        </div>
+      </section>
+
+      <section id="screen-register" class="screen screen--centered hidden">
+        <div class="auth-card auth-card--register">
+          <img class="app-logo" src="assets/logo.png" alt="Logo de RedList" />
+          <h2 class="screen-title">REGÍSTRATE</h2>
+
+          <form id="register-form" class="register-form" novalidate>
+            <label class="register-row">
+              <span class="register-label">Nombre</span>
+              <input
+                id="register-name"
+                class="input"
+                type="text"
+                maxlength="30"
+                placeholder="Nombre completo"
+              />
+            </label>
+
+            <label class="register-row">
+              <span class="register-label">Fecha de nacimiento</span>
+              <input id="register-birth" class="input" type="date" />
+            </label>
+
+            <label class="register-row">
+              <span class="register-label">Correo electrónico</span>
+              <input
+                id="register-email"
+                class="input"
+                type="email"
+                maxlength="30"
+                placeholder="correo@ejemplo.com"
+              />
+            </label>
+
+            <label class="register-row">
+              <span class="register-label">Contraseña</span>
+              <input
+                id="register-password"
+                class="input"
+                type="password"
+                minlength="8"
+                maxlength="15"
+                placeholder="8 a 15 caracteres"
+              />
+            </label>
+
+            <label class="register-row">
+              <span class="register-label">Repetir contraseña</span>
+              <input
+                id="register-password-repeat"
+                class="input"
+                type="password"
+                maxlength="15"
+                placeholder="Repite la contraseña"
+              />
+            </label>
+
+            <label class="register-row">
+              <span class="register-label">Usted es</span>
+              <select id="register-role" class="input input--select">
+                <option value="">Selecciona una opción</option>
+                <option value="Estudiante">Estudiante</option>
+                <option value="Profesor">Profesor</option>
+              </select>
+            </label>
+
+            <label class="register-row">
+              <span class="register-label">Matrícula o número de empleado</span>
+              <input
+                id="register-id"
+                class="input"
+                type="text"
+                maxlength="11"
+                placeholder="Máximo 11 caracteres"
+              />
+            </label>
+          </form>
+
+          <p id="register-error" class="form-error hidden"></p>
+
+          <button id="register-submit" class="btn btn--orange btn--wide" type="button">
+            Crear cuenta
+          </button>
+
+          <p class="helper-text">
+            ¿Ya tienes una cuenta?
+            <button id="go-login" class="link-button" type="button">
+              Iniciar sesión
+            </button>
+          </p>
+        </div>
+      </section>
+
+      <section id="screen-loading" class="screen screen--centered hidden">
+        <div class="auth-card auth-card--loading">
+          <img class="app-logo" src="assets/logo.png" alt="Logo de RedList" />
+          <h2 class="screen-title">BIENVENIDO LINCE</h2>
+          <p class="screen-subtitle screen-subtitle--spaced">CARGANDO</p>
+          <div class="spinner" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <section id="screen-dashboard" class="screen hidden">
+        <div class="dashboard">
+          <header class="topbar">
+            <div class="topbar__icon">U</div>
+            <div class="topbar__welcome">bienvenido a redlist alumno</div>
+            <div id="topbar-user-id" class="topbar__id">00000000000</div>
+          </header>
+
+          <div class="dashboard__body">
+            <aside class="sidebar">
+              <button id="nav-reportes" class="btn btn--blue nav-btn is-active" type="button">
+                Reportes
+              </button>
+              <button id="nav-consecuencias" class="btn btn--orange nav-btn" type="button">
+                Consecuencias
+              </button>
+            </aside>
+
+            <main class="content-panel">
+              <div class="searchbar">
+                <span class="searchbar__icon" aria-hidden="true">🔍</span>
+                <input
+                  id="search-input"
+                  class="input searchbar__input"
+                  type="text"
+                  placeholder="Buscar reporte"
+                />
+              </div>
+
+              <section id="view-reportes" class="view-panel">
+                <div class="table-card">
+                  <div class="table-wrap">
+                    <table class="data-table data-table--wide">
+                      <thead>
+                        <tr>
+                          <th>Nombre</th>
+                          <th>Grupo</th>
+                          <th>Reporte</th>
+                          <th>Sanción</th>
+                          <th>Fecha</th>
+                          <th>Hora</th>
+                          <th>Área</th>
+                          <th>Docente</th>
+                          <th>Nivel</th>
+                          <th>Estado</th>
+                        </tr>
+                      </thead>
+                      <tbody id="reports-table-body"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </section>
+
+              <section id="view-consecuencias" class="view-panel hidden">
+                <div class="table-card">
+                  <h3 class="section-heading">TIPOS DE CONSECUENCIAS / SANCIÓN</h3>
+                  <div class="table-wrap">
+                    <table class="data-table data-table--wide">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Consecuencia</th>
+                          <th>Descripción</th>
+                          <th>Duración</th>
+                          <th>Nivel</th>
+                          <th>Aplica a</th>
+                          <th>Autorización</th>
+                          <th>Seguimiento</th>
+                          <th>Área responsable</th>
+                          <th>Notificación</th>
+                          <th>Observaciones</th>
+                        </tr>
+                      </thead>
+                      <tbody id="consequences-table-body"></tbody>
+                    </table>
+                  </div>
+                  <div class="consequence-actions">
+                    <button class="btn btn--orange" type="button">Consecuencias</button>
+                    <button id="back-menu" class="btn btn--blue" type="button">
+                      Regresar menú
+                    </button>
+                  </div>
+                </div>
+              </section>
+
+              <button id="logout-trigger" class="btn btn--orange btn--small" type="button">
+                Cerrar sesión
+              </button>
+            </main>
+          </div>
+        </div>
+      </section>
+
+      <section id="screen-confirm-logout" class="screen screen--centered hidden">
+        <div class="auth-card">
+          <img class="app-logo" src="assets/logo.png" alt="Logo de RedList" />
+          <h2 class="screen-title">¿ESTÁ SEGURO DE CERRAR SESIÓN?</h2>
+          <div class="action-row">
+            <button id="confirm-logout" class="btn btn--blue btn--wide" type="button">
+              Sí
+            </button>
+            <button id="cancel-logout" class="btn btn--orange btn--wide" type="button">
+              No
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="screen-logged-out" class="screen screen--centered hidden">
+        <div class="auth-card">
+          <img class="app-logo" src="assets/logo.png" alt="Logo de RedList" />
+          <h2 class="screen-title">ADIÓS PERSONITA LINCE</h2>
+          <p class="screen-subtitle screen-subtitle--spaced">CERRAR SESIÓN CON ÉXITO</p>
+          <button id="restart-login" class="btn btn--blue btn--wide" type="button">
+            Iniciar sesión
+          </button>
+        </div>
+      </section>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
