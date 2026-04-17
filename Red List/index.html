@@ -26,12 +26,15 @@
               <input
                 id="login-email"
                 class="input"
-                type="email"
+                type="text"
+                inputmode="email"
                 maxlength="30"
                 placeholder="Correo electrónico"
                 autocomplete="email"
               />
               <span class="field-hint">Máximo 30 caracteres</span>
+              <span id="login-email-error" class="field-hint field-hint--error hidden"
+                >cuenta inexistente o caracteres incorrectos</span>
             </label>
 
             <label class="field field--inline password-field">
@@ -62,12 +65,7 @@
             Iniciar sesión
           </button>
 
-          <p class="helper-text">
-            ¿No tienes una cuenta?
-            <button id="go-register" class="link-button" type="button">
-              Regístrate
-            </button>
-          </p>
+          <p class="helper-text">¿no tienes cuenta?, ¡creala!</p>
 
           <button id="create-account-cta" class="btn btn--orange btn--wide" type="button">
             Crear cuenta
@@ -195,6 +193,7 @@
             </aside>
 
             <main class="content-panel">
+              <div class="content-panel-main">
               <div class="searchbar">
                 <span class="searchbar__icon" aria-hidden="true">🔍</span>
                 <input
@@ -240,10 +239,7 @@
                           <th>Consecuencia</th>
                           <th>Descripción</th>
                           <th>Duración</th>
-                          <th>Nivel</th>
-                          <th>Aplica a</th>
                           <th>Autorización</th>
-                          <th>Seguimiento</th>
                           <th>Área responsable</th>
                           <th>Notificación</th>
                           <th>Observaciones</th>
@@ -252,18 +248,15 @@
                       <tbody id="consequences-table-body"></tbody>
                     </table>
                   </div>
-                  <div class="consequence-actions">
-                    <button class="btn btn--orange" type="button">Consecuencias</button>
-                    <button id="back-menu" class="btn btn--blue" type="button">
-                      Regresar menú
-                    </button>
-                  </div>
                 </div>
               </section>
+              </div>
 
-              <button id="logout-trigger" class="btn btn--orange btn--small" type="button">
-                Cerrar sesión
-              </button>
+              <div class="content-panel-footer">
+                <button id="logout-trigger" class="btn btn--orange btn--small" type="button">
+                  Cerrar sesión
+                </button>
+              </div>
             </main>
           </div>
         </div>

@@ -147,6 +147,11 @@ select {
   color: var(--gray-400);
 }
 
+.field-hint--error {
+  color: #dc2626;
+  font-weight: 600;
+}
+
 .input {
   width: 100%;
   padding: 15px 18px;
@@ -346,6 +351,24 @@ select {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  flex: 1;
+  min-width: 0;
+  min-height: calc(100vh - 140px);
+}
+
+.content-panel-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 0;
+}
+
+.content-panel-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-top: 8px;
 }
 
 .searchbar {
@@ -408,12 +431,6 @@ select {
   margin: 0 0 18px;
   color: var(--blue-dark);
   font-size: 1.2rem;
-}
-
-.consequence-actions {
-  display: flex;
-  gap: 14px;
-  margin-top: 22px;
 }
 
 .action-row {

@@ -13,7 +13,7 @@
   const loginError = document.getElementById("login-error");
   const toggleLoginPassword = document.getElementById("toggle-login-password");
   const loginSubmit = document.getElementById("login-submit");
-  const goRegister = document.getElementById("go-register");
+  const loginEmailError = document.getElementById("login-email-error");
   const createAccountCta = document.getElementById("create-account-cta");
 
   const registerName = document.getElementById("register-name");
@@ -35,7 +35,6 @@
   const reportsTableBody = document.getElementById("reports-table-body");
   const consequencesTableBody = document.getElementById("consequences-table-body");
   const searchInput = document.getElementById("search-input");
-  const backMenu = document.getElementById("back-menu");
   const logoutTrigger = document.getElementById("logout-trigger");
   const confirmLogout = document.getElementById("confirm-logout");
   const cancelLogout = document.getElementById("cancel-logout");
@@ -98,10 +97,7 @@
       consecuencia: "Horas de servicio",
       descripcion: "Apoyo en limpieza escolar",
       duracion: "5 horas",
-      nivel: "Media",
-      aplicaA: "Estudiantes",
       autorizacion: "Prefectura",
-      seguimiento: "Semanal",
       areaResponsable: "Servicios escolares",
       notificacion: "Tutor",
       observaciones: "Cumplimiento obligatorio",
@@ -111,10 +107,7 @@
       consecuencia: "Citatorios",
       descripcion: "Cita formal con tutor",
       duracion: "1 día",
-      nivel: "Baja",
-      aplicaA: "Estudiantes",
       autorizacion: "Dirección",
-      seguimiento: "Único",
       areaResponsable: "Trabajo social",
       notificacion: "Padres",
       observaciones: "Debe presentarse firmado",
@@ -124,10 +117,7 @@
       consecuencia: "Reprobar",
       descripcion: "Sanción académica parcial",
       duracion: "Bimestre",
-      nivel: "Alta",
-      aplicaA: "Casos graves",
       autorizacion: "Consejo",
-      seguimiento: "Mensual",
       areaResponsable: "Coordinación",
       notificacion: "Tutor y alumno",
       observaciones: "Requiere expediente",
@@ -137,10 +127,7 @@
       consecuencia: "Suspensión",
       descripcion: "Separación temporal",
       duracion: "3 días",
-      nivel: "Alta",
-      aplicaA: "Estudiantes",
       autorizacion: "Dirección",
-      seguimiento: "Posterior",
       areaResponsable: "Prefectura",
       notificacion: "Padres",
       observaciones: "Regreso con carta",
@@ -150,10 +137,7 @@
       consecuencia: "Llamar a padres",
       descripcion: "Contacto inmediato",
       duracion: "Mismo día",
-      nivel: "Media",
-      aplicaA: "Estudiantes",
       autorizacion: "Docente",
-      seguimiento: "Diario",
       areaResponsable: "Control escolar",
       notificacion: "Padres",
       observaciones: "Registrar llamada",
@@ -216,10 +200,7 @@
             <td>${escapeHtml(row.consecuencia)}</td>
             <td>${escapeHtml(row.descripcion)}</td>
             <td>${escapeHtml(row.duracion)}</td>
-            <td>${escapeHtml(row.nivel)}</td>
-            <td>${escapeHtml(row.aplicaA)}</td>
             <td>${escapeHtml(row.autorizacion)}</td>
-            <td>${escapeHtml(row.seguimiento)}</td>
             <td>${escapeHtml(row.areaResponsable)}</td>
             <td>${escapeHtml(row.notificacion)}</td>
             <td>${escapeHtml(row.observaciones)}</td>
@@ -259,11 +240,24 @@
     }, 2400);
   }
 
+  function clearLoginEmailError() {
+    loginEmailError.classList.add("hidden");
+  }
+
   function handleLogin() {
     clearError(loginError);
+    clearLoginEmailError();
 
-    if (!loginEmail.value.trim() || !loginPassword.value.trim()) {
+    const email = loginEmail.value.trim();
+    const password = loginPassword.value.trim();
+
+    if (!email || !password) {
       showError(loginError, "Escribe texto en correo y contraseña para iniciar sesión.");
+      return;
+    }
+
+    if (!email.includes("@")) {
+      loginEmailError.classList.remove("hidden");
       return;
     }
 
@@ -328,6 +322,7 @@
     registerId.value = "";
     searchInput.value = "";
     clearError(loginError);
+    clearLoginEmailError();
     clearError(registerError);
     state.filteredReports = sampleReports.slice();
     renderReports(state.filteredReports);
@@ -338,12 +333,14 @@
   });
 
   loginSubmit.addEventListener("click", handleLogin);
-  goRegister.addEventListener("click", function () {
-    clearError(loginError);
-    showScreen("register");
+  loginEmail.addEventListener("input", function () {
+    if (loginEmail.value.includes("@")) {
+      clearLoginEmailError();
+    }
   });
   createAccountCta.addEventListener("click", function () {
     clearError(loginError);
+    clearLoginEmailError();
     showScreen("register");
   });
   goLogin.addEventListener("click", function () {
@@ -360,7 +357,6 @@
 
   navReportes.addEventListener("click", showReportsView);
   navConsecuencias.addEventListener("click", showConsequencesView);
-  backMenu.addEventListener("click", showReportsView);
 
   searchInput.addEventListener("input", function () {
     const term = searchInput.value.trim().toLowerCase();
