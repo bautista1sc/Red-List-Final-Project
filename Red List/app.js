@@ -23,7 +23,6 @@
   const registerPasswordRepeat = document.getElementById("register-password-repeat");
   const registerRole = document.getElementById("register-role");
   const registerId = document.getElementById("register-id");
-  const registerEmailError = document.getElementById("register-email-error");
   const registerError = document.getElementById("register-error");
   const registerSubmit = document.getElementById("register-submit");
   const goLogin = document.getElementById("go-login");
@@ -245,10 +244,6 @@
     loginEmailError.classList.add("hidden");
   }
 
-  function clearRegisterEmailError() {
-    registerEmailError.classList.add("hidden");
-  }
-
   function handleLogin() {
     clearError(loginError);
     clearLoginEmailError();
@@ -272,7 +267,6 @@
 
   function validateRegister() {
     clearError(registerError);
-    clearRegisterEmailError();
 
     const name = registerName.value.trim();
     const birth = registerBirth.value;
@@ -284,11 +278,6 @@
 
     if (!name || !birth || !email || !password || !repeatPassword || !role || !id) {
       showError(registerError, "Completa todos los campos.");
-      return false;
-    }
-
-    if (!email.includes("@")) {
-      registerEmailError.classList.remove("hidden");
       return false;
     }
 
@@ -307,11 +296,8 @@
       return false;
     }
 
-    if (!/^\d{1,18}$/.test(id)) {
-      showError(
-        registerError,
-        "La matrícula o número de empleado solo puede contener números (máximo 18)."
-      );
+    if (id.length > 11) {
+      showError(registerError, "La matrícula o número de empleado no puede exceder 11 caracteres.");
       return false;
     }
 
@@ -338,7 +324,6 @@
     clearError(loginError);
     clearLoginEmailError();
     clearError(registerError);
-    clearRegisterEmailError();
     state.filteredReports = sampleReports.slice();
     renderReports(state.filteredReports);
   }
@@ -356,26 +341,11 @@
   createAccountCta.addEventListener("click", function () {
     clearError(loginError);
     clearLoginEmailError();
-    clearRegisterEmailError();
     showScreen("register");
   });
   goLogin.addEventListener("click", function () {
     clearError(registerError);
-    clearRegisterEmailError();
     showScreen("login");
-  });
-
-  registerEmail.addEventListener("input", function () {
-    if (registerEmail.value.includes("@")) {
-      clearRegisterEmailError();
-    }
-  });
-
-  registerId.addEventListener("input", function () {
-    const digits = registerId.value.replace(/\D/g, "").slice(0, 18);
-    if (registerId.value !== digits) {
-      registerId.value = digits;
-    }
   });
 
   registerSubmit.addEventListener("click", function () {

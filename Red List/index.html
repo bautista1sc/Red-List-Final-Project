@@ -97,18 +97,13 @@
 
             <label class="register-row">
               <span class="register-label">Correo electrónico</span>
-              <div class="register-field-stack">
-                <input
-                  id="register-email"
-                  class="input"
-                  type="email"
-                  maxlength="30"
-                  placeholder="correo@ejemplo.com"
-                />
-                <span class="register-hint register-hint--blue">es necesario que tenga un @</span>
-                <span id="register-email-error" class="register-hint register-hint--orange hidden"
-                  >Es necesario poner @</span>
-              </div>
+              <input
+                id="register-email"
+                class="input"
+                type="email"
+                maxlength="30"
+                placeholder="correo@ejemplo.com"
+              />
             </label>
 
             <label class="register-row">
@@ -149,11 +144,8 @@
                 id="register-id"
                 class="input"
                 type="text"
-                inputmode="numeric"
-                autocomplete="off"
-                maxlength="18"
-                pattern="[0-9]*"
-                placeholder="Solo números, máximo 18"
+                maxlength="11"
+                placeholder="Máximo 11 caracteres"
               />
             </label>
           </form>
